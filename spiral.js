@@ -20,25 +20,25 @@ class Spiral extends Cleaner {
     if(this.x+this.radius>canvas.width) {
       this.bounceRight();
       this.x=canvas.width-this.radius;
-      this.trace.push([this.x,this.y]);
+      //this.trace.push([this.x,this.y]);
       this.resetSpiralParams();
     }
     else if(this.x-this.radius<0) {
       this.bounceLeft();
       this.x=this.radius+0;
-      this.trace.push([this.x,this.y]);
+      //this.trace.push([this.x,this.y]);
       this.resetSpiralParams();
     }
     else if(this.y-this.radius<0) {
       this.bounceTop();
       this.y=this.radius;
-      this.trace.push([this.x,this.y]);
+      //this.trace.push([this.x,this.y]);
       this.resetSpiralParams();
     }
     else if(this.y+this.radius>canvas.height) {
       this.bounceBottom();
       this.y=canvas.height-this.radius;
-      this.trace.push([this.x,this.y]);
+      //this.trace.push([this.x,this.y]);
       this.resetSpiralParams();
     }
     this.trace.push([this.x,this.y]);

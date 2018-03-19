@@ -21,6 +21,7 @@
 <div id="data"></div>
 <script src="cleaner.js"></script>
 <script src="spiral.js"></script>
+<script src="snaking.js"></script>
 <script>
 function addData(run,data){
   if(document.getElementById("r"+run) == undefined) {
@@ -41,7 +42,7 @@ function addData(run,data){
 }
 var c = null;
 function addRobot(){
-  c = new Spiral(Math.round(canvas.width*Math.random()),Math.round(canvas.height*Math.random()),6,"#5f1",Math.random()*Math.PI, 3);
+  c = new Snaking(Math.round(canvas.width*Math.random()),Math.round(canvas.height*Math.random()),6,"#5f1",Math.random()*2*Math.PI, 3);
 }
 
 var canvas = document.getElementById("canvas");

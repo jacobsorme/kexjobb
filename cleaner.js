@@ -1,5 +1,4 @@
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+
 
 class Cleaner {
   constructor(x,y,radius,color,ang, speed){
@@ -41,11 +40,8 @@ class Cleaner {
     else this.rotate(3*2*Math.PI/4 + Math.random()*Math.PI/2);
   }
   bounceTop(){
-    console.log("BOUNCE: "+this.ang);
-
     if(this.ang<2*Math.PI&&this.ang>3*2*Math.PI/4) this.rotate(Math.random()*Math.PI/2);
     else this.rotate(Math.PI/2+Math.random()*Math.PI/2);
-    console.log(" --> "+this.ang);
   }
   bounceBottom(){
     if(this.ang<Math.PI/2) this.rotate(3*2*Math.PI/4+Math.random()*Math.PI/2);

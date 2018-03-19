@@ -5,16 +5,20 @@
   <meta name="viewport" content="width=device-width">
 </head>
 <body >
-<canvas width="100px" height="100px" id="canvas" style="border:solid 1px #000;"></canvas>
+<canvas width="200px" height="200px" id="canvas" style="border:solid 1px #000;"></canvas>
 <br>Results
 <table id="results">
   <tr>
     <th>run</th>
     <th>0.5</th>
+    <th>angle</th>
     <th>0.8</th>
+    <th>angle</th>
     <th>0.95</th>
+    <th>angle</th>
   </tr>
 </table>
+<div id="data"></div>
 <script src="cleaner.js"></script>
 <script src="spiral.js"></script>
 <script>
@@ -27,19 +31,23 @@ function addData(run,data){
     r.appendChild(h);
     document.getElementById("results").appendChild(r);
   }
-  var d = document.createElement("td");
-  d.innerHTML=data+", "+Math.round((100*c.totalAng)/(2*Math.PI))/100;
-  document.getElementById("r"+run).appendChild(d);
+  var d1 = document.createElement("td");
+  var d2 = document.createElement("td");
+  d1.innerHTML=data;
+  d2.innerHTML=Math.round((10*c.totalAng)/(2*Math.PI))/10;
+  document.getElementById("r"+run).appendChild(d1);
+  document.getElementById("r"+run).appendChild(d2);
 
 }
 var c = null;
 function addRobot(){
-  c = new Cleaner(canvas.width*Math.random(),canvas.height*Math.random(),3,"#5f1",Math.PI*2*Math.random(), 3);
+  c = new Spiral(Math.round(canvas.width*Math.random()),Math.round(canvas.height*Math.random()),6,"#5f1",Math.random()*Math.PI, 3);
 }
 
-
-
-var interval = setInterval(run,50);
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+addRobot();
+var interval = setInterval(run,10);
 
 var steps = 0;
 var run = 0;
@@ -53,20 +61,24 @@ function reset(){
   run++;
   lastPercentage=0;
 }
+ctx.fillStyle="#fff";
+//ctx.fillRect(0,0,canvas.width,canvas.height);
 
-addRobot();
 function run(){
-  console.log(c.totalAng/(2*Math.PI));
-  ctx.globalAlpha=1;
+
+  ctx.globalAlpha=0.1;
   ctx.strokeStyle="#000";
   ctx.lineWidth=2;
   ctx.fillStyle="#fff";
 
-  ctx.strokeRect(0,0,canvas.width,canvas.height);
+
+  if(steps%50 ==0) document.getElementById("data").innerHTML +=(pixels(ctx)+"<br>");
+
+  //ctx.strokeRect(0,0,canvas.width,canvas.height);
   c.move();
   c.render();
   steps++;
-  var percentage = pixels(ctx);
+  /*var percentage = pixels(ctx);
   if(percentage>=0.5 && lastPercentage<0.5) {
     lastPercentage = percentage;
     addData(run,steps);
@@ -79,7 +91,7 @@ function run(){
     lastPercentage = percentage;
     addData(run,steps);
     reset();
-  }
+  }*/
 
 }
 
@@ -87,7 +99,8 @@ function pixels(ctx){
   count=0;
   var imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
   for (var i=0;i<imgData.data.length;i+=4) if(imgData.data[i+3]>0)count++;
-  return count/imgData.data.length*4;
+  //return count/imgData.data.length*4;
+  return count;
 }
 
 

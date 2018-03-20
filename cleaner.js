@@ -14,7 +14,7 @@ class Cleaner {
     this.totalAng = 0;
   }
   render(){
-    ctx.globalAlpha=1;
+    ctx.globalAlpha=0.1;
     //ctx.lineJoin="round";
     //ctx.lineCap="round";
     ctx.strokeStyle="#000";

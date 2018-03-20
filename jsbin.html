@@ -42,19 +42,20 @@ function addData(run,data){
 }
 var c = null;
 function addRobot(){
-  c = new Snaking(192,192,6,"#5f1",Math.PI*3/2, 3);
+  c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
 }
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 addRobot();
-var interval = setInterval(run,50);
+
 
 var steps = 0;
 var runNumber = 0;
 var lastPercentage = 0;
 var percentage = 0;
 
+var interval = setInterval(run,5);
 
 function reset(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -65,19 +66,15 @@ function reset(){
   percentage = 0;
 }
 ctx.fillStyle="#fff";
-//ctx.fillRect(0,0,canvas.width,canvas.height);
+
 
 function run(){
 
-  ctx.globalAlpha=0.1;
+  ctx.globalAlpha=0.5;
   ctx.strokeStyle="#000";
   ctx.lineWidth=2;
-  ctx.fillStyle="#fff";
+  ctx.fillStyle="#050";
 
-
-  //if(steps%50 ==0) document.getElementById("data").innerHTML +=(pixels(ctx)+"<br>");
-
-  //ctx.strokeRect(0,0,canvas.width,canvas.height);
   c.move();
   c.render();
   steps++;
@@ -102,7 +99,7 @@ function pixels(ctx){
   var imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
   for (var i=3;i<imgData.data.length;i+=4) if(imgData.data[i]>0)count++;
   return count/(imgData.data.length/4);
-  //return count;
+
 }
 
 

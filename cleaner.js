@@ -14,7 +14,7 @@ class Cleaner {
     this.totalAng = 0;
   }
   render(){
-    ctx.globalAlpha=0.1;
+    ctx.globalAlpha=1;
     //ctx.lineJoin="round";
     //ctx.lineCap="round";
     ctx.strokeStyle="#000";
@@ -34,7 +34,7 @@ class Cleaner {
       } else {
           this.totalAng += Math.abs(this.ang-ang);
       }
-    this.ang = (ang) % (2*Math.PI);
+    this.ang = ang % (Math.PI*2);
   }
 
   bounceRight(){

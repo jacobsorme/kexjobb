@@ -5,7 +5,7 @@ class Snaking extends Cleaner {
     this.old_x = 0;
     this.old_y = 0;
     this.old_ang = this.ang;
-    this.wall_dir();
+    this.wall_dir = 1;
   }
 
   wall_dir() {
@@ -41,22 +41,30 @@ class Snaking extends Cleaner {
   done_walling() {
       if( this.coll == "h" ) {
           if(this.wall_dir) {
-              if(this.x+this.radius < this.old_x) {
+              if(this.x+1.8*this.radius < this.old_x) {
                   return true;
+              } else {
+                  return false;
               }
           } else {
-              if(this.x-this.radius > this.old_x) {
+              if(this.x-1.8*this.radius > this.old_x) {
                   return true;
+              } else {
+                  return false;
               }
           }
       } else if( this.coll == "v" ) {
           if(this.wall_dir) {
-              if(this.y+this.radius < this.old_y) {
+              if(this.y+1.8*this.radius < this.old_y) {
                   return true;
+              } else {
+                  return false;
               }
           } else {
-              if(this.y-this.radius > this.old_y) {
+              if(this.y-1.8*this.radius > this.old_y) {
                   return true;
+              } else {
+                  return false;
               }
           }
       }
@@ -76,7 +84,7 @@ class Snaking extends Cleaner {
         this.x=canvas.width-this.radius;
         this.store_wall("v");
       } else if(this.x-this.radius<0) {
-        this.x=this.radius+0;
+        this.x=this.radius+.1;
         this.store_wall("v");
       } else if(this.y-this.radius<0) {
         this.y=this.radius;

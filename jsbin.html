@@ -16,30 +16,35 @@
 
 var c = null;
 function addRobot(){
-  c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
+  c = new Cleaner(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
 }
-
+var interval;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 addRobot();
-var max_runs = 1;
+var max_runs = 2;
 var run_count = 0;
 var current_p = 0;
 var steps = 0;
-var last_percentage = 0;
+var last_percentage = 0.01;
 var percentage = 0;
-var data_storage = [];
+var data_storage = [[]];
 
 var refesh_rate = 5;
 
 ctx.fillStyle="#fff";
 
+
+function addData(data){
+  document.getElementById("data").innerHTML += (data + "<br>");
+}
+
 function display_data() {
-    for(var e = 0; e < 95; e++) {
+    /*for(var e = 0; e < 95; e++) {
         data_storage[e] = Math.floor(data_storage[e]/max_runs);
         document.write(data_storage[e] + " ");
-    }
-
+    }*/
+    console.log(data_storage);
 }
 
 function restart() {
@@ -48,9 +53,10 @@ function restart() {
     } else {
         addRobot();
         ctx.clearRect(0,0,canvas.width,canvas.height);
+        data_storage.push([]);
         run_count++;
         steps = 0;
-        last_percentage = 0;
+        last_percentage = 0.01;
         percentage = 0;
         current_p = 0;
         interval = setInterval(run,refesh_rate);
@@ -58,22 +64,16 @@ function restart() {
 }
 
 function run(){
-
-  ctx.globalAlpha=0.5;
-  ctx.strokeStyle="#000";
-  ctx.lineWidth=2;
-  ctx.fillStyle="#050";
-
   c.move();
   c.render();
   steps++;
   percentage = pixels(ctx);
-  if(percentage-last_percentage >= 0.01) {
-      data_storage[current_p] += steps;
-      document.write(data_storage[current_p]);
-      current_p++;
+  if(percentage>last_percentage) {
+      //addData(steps);
+      data_storage[run_count].push(steps);
+      last_percentage += 0.01;
+      console.log(data_storage[run_count].length);
   }
-  last_percentage = percentage;
   if(percentage >= 0.95) {
       clearInterval(interval);
       restart();

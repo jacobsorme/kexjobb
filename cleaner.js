@@ -15,8 +15,6 @@ class Cleaner {
   }
   render(){
     ctx.globalAlpha=0.1;
-    //ctx.lineJoin="round";
-    //ctx.lineCap="round";
     ctx.strokeStyle="#000";
     ctx.lineWidth=2*this.radius;
     let i =this.trace.length-1;

@@ -99,14 +99,14 @@ class Snaking extends Cleaner {
       } else if(this.y-this.radius<0) {
         this.y=this.radius;
         if(!this.walling) {
-            this.store_wall("v");
+            this.store_wall("h");
         } else {
             this.restart(Math.random()*Math.PI + Math.PI);
         }
       } else if(this.y+this.radius>canvas.height) {
         this.y=canvas.height-this.radius;
         if(!this.walling) {
-            this.store_wall("v");
+            this.store_wall("h");
         } else {
             this.restart(Math.random()*Math.PI);
 

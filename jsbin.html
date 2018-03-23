@@ -6,91 +6,90 @@
 </head>
 <body >
 <canvas width="200px" height="200px" id="canvas" style="border:solid 1px #000;"></canvas>
-<br>Results
-<table id="results">
-  <tr>
-    <th>run</th>
-    <th>0.5</th>
-    <th>angle</th>
-    <th>0.8</th>
-    <th>angle</th>
-    <th>0.95</th>
-    <th>angle</th>
-  </tr>
-</table>
+<h2>RESULTS</h2>
+<p id="res"></p>
 <div id="data"></div>
 <script src="cleaner.js"></script>
 <script src="spiral.js"></script>
 <script src="snaking.js"></script>
 <script>
-function addData(run,data){
-  if(document.getElementById("r"+run) == undefined) {
-    var r = document.createElement("tr");
-    r.id = "r"+run;
-    var h = document.createElement("td");
-    h.innerHTML=run;
-    r.appendChild(h);
-    document.getElementById("results").appendChild(r);
-  }
-  var d1 = document.createElement("td");
-  var d2 = document.createElement("td");
-  d1.innerHTML=data;
-  d2.innerHTML=Math.round((10*c.totalAng)/(2*Math.PI))/10;
-  document.getElementById("r"+run).appendChild(d1);
-  document.getElementById("r"+run).appendChild(d2);
 
-}
 var c = null;
 function addRobot(){
   c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
 }
-
+var interval;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+
+
 addRobot();
-
-
+var max_runs = 3;
+var run_count = 0;
+var current_p = 0;
 var steps = 0;
-var runNumber = 0;
-var lastPercentage = 0;
+var last_percentage = 0.01;
 var percentage = 0;
+var data_storage = [[]];
+var radians_storage = [[]];
 
-var interval = setInterval(run,5);
+var refesh_rate = 10;
 
-function reset(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  addRobot();
-  steps = 0;
-  runNumber++;
-  lastPercentage=0;
-  percentage = 0;
-}
 ctx.fillStyle="#fff";
 
 
+function addData(data){
+  document.getElementById("data").innerHTML += (data + "<br>");
+}
+
+function display_data() {
+	var data_string = "";
+	var turnString = "";
+    for(let i = 0; i<95;i++) {
+	let sum_d = 0;
+	let sum_r = 0;
+    	for(let r of data_storage) sum_d+=r[i];
+	for(let r of radians_storage) sum_r+=r[i];
+
+	data_string += (sum_d/max_runs) + "\n";
+	turnString += (sum_r/max_runs) + "\n"
+    }
+	console.log(data_string);
+	console.log(turnString);
+}
+
+function restart() {
+ASS = 0;
+    if(run_count == max_runs-1) {
+        display_data();
+    } else {
+        addRobot();
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        data_storage.push([]);
+	radians_storage.push([]);
+        run_count++;
+        steps = 0;
+        last_percentage = 0.01;
+        percentage = 0;
+        current_p = 0;
+        interval = setInterval(run,refesh_rate);
+    }
+}
+
 function run(){
-
-  ctx.globalAlpha=0.5;
-  ctx.strokeStyle="#000";
-  ctx.lineWidth=2;
-  ctx.fillStyle="#050";
-
   c.move();
   c.render();
   steps++;
-  if(Math.random()<0.1) percentage = pixels(ctx);
-  if(percentage>=0.5 && lastPercentage<0.5) {
-    lastPercentage = percentage;
-    addData(runNumber,steps);
+  percentage = pixels(ctx);
+  if(percentage>last_percentage) {
+      data_storage[run_count].push(steps);
+      radians_storage[run_count].push(0.5*c.totalAng/Math.PI);
+      last_percentage += 0.01;
+	//console.log(++ASS);
   }
-  if(percentage>=0.8 &&lastPercentage<0.8) {
-    lastPercentage = percentage;
-    addData(runNumber,steps);
-  }
-  if(percentage>=0.95 && lastPercentage<0.95) {
-    lastPercentage = percentage;
-    addData(runNumber,steps);
-    reset();
+  if(percentage >= 0.95) {
+      clearInterval(interval);
+      restart();
   }
 }
 
@@ -102,7 +101,7 @@ function pixels(ctx){
 
 }
 
-
+var interval = setInterval(run,refesh_rate);
 
 </script>
 </body>

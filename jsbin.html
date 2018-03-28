@@ -48,7 +48,13 @@ function display_data() {
     for(let i = 0; i<95;i++) {
 	let sum_d = 0;
 	let sum_r = 0;
-    	for(let r of data_storage) sum_d+=r[i];
+    	for(let r of data_storage) {
+	    if(r.length != 95) {
+       	        console.log(data_storage);
+                return;
+            }	
+	    sum_d+=r[i];
+	}
 	for(let r of radians_storage) sum_r+=r[i];
 
 	data_string += (sum_d/max_runs) + "\n";
@@ -59,7 +65,6 @@ function display_data() {
 }
 
 function restart() {
-ASS = 0;
     if(run_count == max_runs-1) {
         display_data();
     } else {
@@ -84,10 +89,11 @@ function run(){
   if(percentage>last_percentage) {
       data_storage[run_count].push(steps);
       radians_storage[run_count].push(0.5*c.totalAng/Math.PI);
-      last_percentage += 0.01;
-	//console.log(++ASS);
+      last_percentage = last_percentage + 0.01;
+
   }
-  if(last_percentage > 0.95) {
+  if(last_percentage > 0.9501) {
+	//console.log(data_storage[run_count].length + "   " +(Math.floor(0.95*100)/100));
       clearInterval(interval);
       restart();
   }

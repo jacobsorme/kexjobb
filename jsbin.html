@@ -24,7 +24,7 @@ var ctx = canvas.getContext("2d");
 
 
 addRobot();
-var max_runs = 3;
+var max_runs = 20;
 var run_count = 0;
 var current_p = 0;
 var steps = 0;
@@ -87,7 +87,7 @@ function run(){
       last_percentage += 0.01;
 	//console.log(++ASS);
   }
-  if(percentage >= 0.95) {
+  if(last_percentage > 0.95) {
       clearInterval(interval);
       restart();
   }

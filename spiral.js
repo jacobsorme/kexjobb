@@ -3,7 +3,7 @@ class Spiral extends Cleaner {
     super(x,y,radius,color,ang,speed);
     this.inSpiral = false;
     this.turn = 0.6;
-    this.margin = 90;
+    this.margin = 70;
   }
   resetSpiralParams(){
     this.turn = 0.6;

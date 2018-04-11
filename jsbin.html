@@ -6,6 +6,8 @@
 </head>
 <body >
 <canvas width="200px" height="200px" id="canvas" style="border:solid 1px #000;"></canvas>
+<canvas width="200px" height="200px" id="heatmap" style="border:solid 1px #000;"></canvas>
+
 <h2>RESULTS</h2>
 <p id="res"></p>
 <div id="data"></div>
@@ -16,15 +18,16 @@
 
 var c = null;
 function addRobot(){
-  c = new Cleaner(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
+  c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),8,"#5f1",Math.random()*Math.PI*2, 12);
 }
 var interval;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 
+
 addRobot();
-var max_runs = 5;
+var max_runs = 3;
 var run_count = 0;
 var current_p = 0;
 var steps = 0;
@@ -36,7 +39,7 @@ var opacity = [];
 opacity.length = parseInt(document.getElementById("canvas").height)*parseInt(document.getElementById("canvas").width);
 console.log(opacity.length);
 
-var refesh_rate = 1;
+var refresh_rate;
 
 ctx.fillStyle="#fff";
 
@@ -67,10 +70,26 @@ function display_data() {
 	console.log(turnString);
 }
 
+
+
+
 function restart() {
+    clearInterval(refresh_rate);
     if(run_count == max_runs-1) {
         for(let i in opacity) opacity[i] = opacity[i]/max_runs;
         display_data();
+        let c = document.getElementById("heatmap");
+        let ct = c.getContext("2d");
+        let imgData = ct.getImageData(0,0,c.width,c.height);
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            let o = Math.round( opacity[((i+3+1)/4)-1] );
+
+            imgData.data[i] = Math.min(o+50,255);
+            imgData.data[i+1] = 0;
+            imgData.data[i+2] = Math.max(255-o,0);
+            imgData.data[i+3] = 200;
+        }
+         ct.putImageData(imgData,0,0);
 
     } else {
         addRobot();
@@ -81,13 +100,13 @@ function restart() {
         }
         ctx.clearRect(0,0,canvas.width,canvas.height);
         data_storage.push([]);
-	radians_storage.push([]);
+	      radians_storage.push([]);
         run_count++;
         steps = 0;
         last_percentage = 0.01;
         percentage = 0;
         current_p = 0;
-        interval = setInterval(run,refesh_rate);
+        refresh_rate = setInterval(run,1);
     }
 }
 
@@ -107,6 +126,7 @@ function run(){
       clearInterval(interval);
       restart();
   }
+
 }
 
 function pixels(ctx){
@@ -119,8 +139,7 @@ function pixels(ctx){
 
 }
 
-var interval = setInterval(run,refesh_rate);
-
+ refresh_rate = setInterval(run,1);
 </script>
 </body>
 </html>

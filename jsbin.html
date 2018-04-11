@@ -16,7 +16,7 @@
 
 var c = null;
 function addRobot(){
-  c = new Cleaner(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
+  c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
 }
 var interval;
 var canvas = document.getElementById("canvas");
@@ -34,7 +34,6 @@ var data_storage = [[]];
 var radians_storage = [[]];
 var opacity = [];
 opacity.length = parseInt(document.getElementById("canvas").height)*parseInt(document.getElementById("canvas").width);
-console.log(opacity.length);
 
 var refesh_rate = 1;
 
@@ -68,20 +67,20 @@ function display_data() {
 }
 
 function restart() {
+    let imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
+    for (var i = 3; i < imgData.data.length; i += 4) {
+      if(run_count == 0 ) opacity[parseInt(((i+1)/4)-1)] = imgData.data[i];
+      else opacity[parseInt(((i+1)/4)-1)] += imgData.data[i];
+    }
     if(run_count == max_runs-1) {
         for(let i in opacity) opacity[i] = opacity[i]/max_runs;
         display_data();
 
     } else {
         addRobot();
-        let imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
-        for (var i = 3; i < imgData.data.length; i += 4) {
-          if(run_count == 0 ) opacity[parseInt(((i+1)/4)-1)] = imgData.data[i];
-          else opacity[parseInt(((i+1)/4)-1)] += imgData.data[i];
-        }
         ctx.clearRect(0,0,canvas.width,canvas.height);
         data_storage.push([]);
-	radians_storage.push([]);
+	    radians_storage.push([]);
         run_count++;
         steps = 0;
         last_percentage = 0.01;
@@ -116,7 +115,6 @@ function pixels(ctx){
     if(imgData.data[i]>0)count++;
   }
   return count/(imgData.data.length/4);
-
 }
 
 var interval = setInterval(run,refesh_rate);

@@ -18,7 +18,7 @@
 
 var c = null;
 function addRobot(){
-  c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),8,"#5f1",Math.random()*Math.PI*2, 12);
+  c = new Cleaner(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 12);
 }
 var interval;
 var canvas = document.getElementById("canvas");
@@ -27,7 +27,7 @@ var ctx = canvas.getContext("2d");
 
 
 addRobot();
-var max_runs = 3;
+var max_runs = 10;
 var run_count = 0;
 var current_p = 0;
 var steps = 0;

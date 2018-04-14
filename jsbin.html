@@ -18,16 +18,16 @@
 
 var c = null;
 function addRobot(){
-  c = new Cleaner(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
+  c = new Spiral(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
 }
-var interval;
+
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 
 
 addRobot();
-var max_runs = 10;
+var max_runs = 10000;
 var run_count = 0;
 var current_p = 0;
 var steps = 0;
@@ -38,7 +38,7 @@ var radians_storage = [[]];
 var opacity = [];
 opacity.length = parseInt(document.getElementById("canvas").height)*parseInt(document.getElementById("canvas").width);
 
-var refresh_rate;
+var refresh_rate = 1;
 
 ctx.fillStyle="#fff";
 
@@ -73,7 +73,6 @@ function display_data() {
 
 
 function restart() {
-    clearInterval(refresh_rate);
     let imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
     for (var i = 3; i < imgData.data.length; i += 4) {
       if(run_count == 0 ) opacity[parseInt(((i+1)/4)-1)] = imgData.data[i];
@@ -105,7 +104,7 @@ function restart() {
         last_percentage = 0.01;
         percentage = 0;
         current_p = 0;
-        refresh_rate = setInterval(run,1);
+        interval = setInterval(run,refresh_rate);
     }
 }
 
@@ -137,7 +136,7 @@ function pixels(ctx){
   return count/(imgData.data.length/4);
 }
 
- refresh_rate = setInterval(run,1);
+ var interval = setInterval(run,refresh_rate);
 </script>
 </body>
 </html>

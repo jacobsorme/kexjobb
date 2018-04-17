@@ -27,12 +27,13 @@ class Cleaner {
   }
 
   rotate(ang){
+      ang %= Math.PI*2;
       if(Math.abs(this.ang - ang) > Math.PI) {
-          this.totalAng += Math.abs(this.ang-ang)-Math.PI;
+          this.totalAng += 2*Math.PI - Math.abs(this.ang-ang);
       } else {
           this.totalAng += Math.abs(this.ang-ang);
       }
-    this.ang = ang % (Math.PI*2);
+    this.ang = ang;
   }
 
   bounceRight(){

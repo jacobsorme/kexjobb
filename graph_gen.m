@@ -585,10 +585,10 @@ snake_turns = [
 ]; 
 
 
-x_axis_percentage = (1:94)';
+x_axis_percentage = (1:60)';
 
-%plot(x_axis_percentage, snake_updates, x_axis_percentage, random_updates);
-plot(x_axis_percentage, snake_turns, x_axis_percentage, random_turns, x_axis_percentage, spiral_turns);
+plot(x_axis_percentage, snake_updates(1:60),x_axis_percentage, random_updates(1:60),x_axis_percentage, spiral_updates(1:60));
+%plot(x_axis_percentage, snake_turns, x_axis_percentage, random_turns, x_axis_percentage, spiral_turns);
 
 hold on
 legend('snaking','random', 'spiral')

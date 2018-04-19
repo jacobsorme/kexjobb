@@ -2,19 +2,19 @@ class Spiral extends Cleaner {
   constructor(x,y,radius,color,ang, speed){
     super(x,y,radius,color,ang,speed);
     this.inSpiral = false;
-    this.turn = 0.6;
+    this.turn = 0.2;
     this.margin = 70;
   }
   resetSpiralParams(){
-    this.turn = 0.6;
+    this.turn = 0.2;
     this.inSpiral = false;
   }
   move(){
     this.x += (this.speed*Math.cos(this.ang));
     this.y += (this.speed*Math.sin(this.ang));
     if( this.inSpiral || (this.x>this.margin && this.y>this.margin && this.x<canvas.width-this.margin && this.y<canvas.height-this.margin)){
-      this.rotate(this.ang+=this.turn);
-      this.turn=this.turn/(1.01-(0.01-Math.abs(this.turn)/20));
+      this.rotate(this.ang+this.turn);
+      this.turn=this.turn/(1.01-(0.01-Math.abs(this.turn)/22));
       this.inSpiral=true;
     }
     if(this.x+this.radius>canvas.width) {

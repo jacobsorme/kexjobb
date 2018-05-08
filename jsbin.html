@@ -48,12 +48,12 @@ function addData(data){
 }
 
 function display_data() {
-	var data_string = "";
-	var turnString = "";
+	var data_string = "UPDATE AVERAGES\n";
+	var turnString = "TURNS AVERAGES\n";
     	var mean_runs = [];
 	var mean_turns = [];
-	var dev_run_string = "";
-	var dev_turn_string = "";
+	var dev_run_string = "UPDATE DEVIATIONS\n";
+	var dev_turn_string = "TURN DEVIATIONS\n";
 	
 	for(let i = 0; i < 95; i++) {
 	    let sum_d = 0;
@@ -70,21 +70,23 @@ function display_data() {
 	for(let i = 0; i < 95; i++) {
 	    var data_diff = 0;
 	    for(let r of data_storage) {
-	    	data_diff += Math.pow(data_storage[i]-mean_runs[i],2);
+	    	data_diff += Math.pow(r[i]-mean_runs[i],2);
 	    }
 	    data_diff *= (1/max_runs);
 	    dev_run_string += Math.sqrt(data_diff) + "\n";	
-	}
-	for(let i = 0; i < 95; i++) {
+	    
 	    var turn_diff = 0;
 	    for(let r of radians_storage) {
-	    	turn_diff += Math.pow(radians_storage[i]-mean_turns[i],2);
+	    	turn_diff += Math.pow(r[i]-mean_turns[i],2);
 	    }
 	    turn_diff *= (1/max_runs);
 	    dev_turn_string += Math.sqrt(turn_diff) + "\n";	
 	}
+
 	console.log(data_string);
 	console.log(turnString);
+	console.log(dev_run_string);
+	console.log(dev_turn_string);
 }
 
 

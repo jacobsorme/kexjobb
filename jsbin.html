@@ -50,19 +50,56 @@ function addData(data){
 function display_data() {
 	var data_string = "UPDATE AVERAGES\n";
 	var turnString = "TURNS AVERAGES\n";
+	
     	var mean_runs = [];
 	var mean_turns = [];
+	
+	var max_runs = "MAX RUNS\n";
+	var min_runs = "MIN RUNS\n";
+	
+	var max_turns = "MAX TURNS\n";
+	var min_turns = "MIN TURNS\n";
+	
 	var dev_run_string = "UPDATE DEVIATIONS\n";
 	var dev_turn_string = "TURN DEVIATIONS\n";
 	
 	for(let i = 0; i < 95; i++) {
 	    let sum_d = 0;
 	    let sum_r = 0;
-    	    for(let r of data_storage) sum_d+=r[i];
-	    for(let r of radians_storage) sum_r+=r[i];
-
+		
+    	    let min_turn = 0;
+	    let max_turn = 0;
+		
+ 	    let min_run = 0;
+	    let max_run = 0;
+		
+	    for(let r of data_storage) {
+	    	sum_d+=r[i];
+		if(r[i] > max_run) {
+		    max_run = r[i];
+		}
+		if(r[i] < min_run) {
+		    min_run = r[i];
+		}
+	    }
+            max_runs += max_run + "\n";
+	    min_runs += min_run + "\n";
+		
+	    for(let r of radians_storage) {
+	         sum_r+=r[i];
+	         if(r[i] > max_turn) {
+		    max_turn = r[i];
+		}
+		if(r[i] < min_turn) {
+		    min_turn = r[i];
+		}
+	    }
+            max_turns += max_turn + "\n";
+	    min_turns += min_turn + "\n";
+		
 	    data_string += (sum_d/max_runs) + "\n";
 	    turnString += (sum_r/max_runs) + "\n"
+		
             mean_runs.push((sum_d/max_runs));
 	    mean_turns.push((sum_r/max_runs));
 	}

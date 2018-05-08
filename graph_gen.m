@@ -46,3 +46,18 @@ title('Snaking & Random - Turns 2000 runs average')
 ylabel('Updates')
 xlabel('% of area coverage')
 %hold off;
+
+x = 1 : 20;
+
+f = @(x) x.^2; 
+
+sdPlus = f(x)+50;
+sdMinus = f(x)-50;
+
+
+plot(x,f(x)); 
+hold on; 
+
+area = [sdPlus,fliplr(sdMinus)]; 
+fill([x,fliplr(x)],area,'g'); 
+alpha(0.3); 

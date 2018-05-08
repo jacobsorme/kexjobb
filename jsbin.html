@@ -54,8 +54,8 @@
     var mean_runs = [];
     var mean_turns = [];
 
-    var max_runs = "MAX RUNS\n";
-    var min_runs = "MIN RUNS\n";
+    var max_updates = "MAX RUNS\n";
+    var min_updates = "MIN RUNS\n";
 
     var max_turns = "MAX TURNS\n";
     var min_turns = "MIN TURNS\n";
@@ -82,8 +82,8 @@
           min_run = r[i];
         }
       }
-      max_runs += max_run + "\n";
-      min_runs += min_run + "\n";
+      max_updates += max_run + "\n";
+      min_updates += min_run + "\n";
 
       for(let r of radians_storage) {
         sum_r+=r[i];
@@ -124,8 +124,8 @@
     console.log(turnString);
     console.log(dev_run_string);
     console.log(dev_turn_string);
-    console.log(max_runs);
-    console.log(min_runs);
+    console.log(max_updates);
+    console.log(min_updates);
     console.log(max_turns);
     console.log(min_turns);
   }

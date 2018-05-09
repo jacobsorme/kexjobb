@@ -15,6 +15,10 @@ snaking_turns_s = readFile('runs/snaking_turns_s.txt');
 
 %%% SPIRAL 
 spiral_updates_s = readFile('runs/spiral_updates_s.txt');
+spiral_updates_e = readFile('runs/spiral_updates_e.txt');
+
+spiral_turns_e = readFile('runs/spiral_turns_e.txt');
+spiral_turns_s = readFile('runs/spiral_turns_s.txt');
 
 %%% NOTE!!! LENGTH 94 HERE FOR TURNS, 95 FOR UPDATES
 x = (1:94)';
@@ -26,8 +30,9 @@ hold on;
 % 
 % plot(x,snaking_updates_e,'r--','DisplayName','Snaking Elongated Room')
 % plot(x,snaking_updates_s,'r','DisplayName','Snaking Square Room')
-
-%plot(x,spiral_updates_s,'y','DisplayName','Random Square Room')
+% 
+% plot(x,spiral_updates_e,'g--','DisplayName','Spiral Elongated Room')
+% plot(x,spiral_updates_s,'g','DisplayName','Spiral Square Room')
 
 %%% TURNS 
 plot(x,random_turns_e,'b--','DisplayName','Random Elongated Room')
@@ -36,6 +41,9 @@ plot(x,random_turns_s,'b','DisplayName','Random Square Room')
 plot(x,snaking_turns_e,'r--','DisplayName','Snaking Elongated Room')
 plot(x,snaking_turns_s,'r','DisplayName','Snaking Square Room')
 
+% plot(x,spiral_turns_e,'g--','DisplayName','Spiral Elongated Room')
+% plot(x,spiral_turns_s,'g','DisplayName','Spiral Square Room')
+
 hold off
 
 legend(gca,'show','location','northwest')
@@ -43,6 +51,6 @@ legend(gca,'show','location','northwest')
 %legend('snaking','random', 'spiral')
 legend('boxoff')
 title('Snaking & Random - Turns 2000 runs average')
-ylabel('Updates')
+ylabel('Turns')
 xlabel('% of area coverage')
 %hold off;

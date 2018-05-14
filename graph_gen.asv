@@ -36,7 +36,7 @@ spiral_trn_s_sd = readFile('runs/spiral/deviation_spiral_turns_s.txt');
 spiral_trn_e_sd = readFile('runs/spiral/deviation_spiral_turns_e.txt');
 
 %%% NOTE!!! LENGTH 94 HERE FOR TURNS, 95 FOR UPDATES
-x = (1:95)';
+x = (1:94)';
 
 hold on; 
 %%% UPDATES 
@@ -66,7 +66,7 @@ plot(x,snaking_turns_s,'r','DisplayName','Snaking Square Room');
 fillPlot(snaking_turns_s,snaking_trn_s_sd,x,'r'); 
 
 plot(x,spiral_turns_e,'g--','DisplayName','Spiral Elongated Room')
-fillPlot(spiral_turns_e,spiral_trn_e_sd,x,'g'); 
+fillPlot(spiral_turns_s,spiral_trn_e_sd,x,'g'); 
 
 plot(x,spiral_turns_s,'g','DisplayName','Spiral Square Room')
 fillPlot(spiral_turns_s,spiral_trn_s_sd,x,'g'); 

@@ -53,20 +53,20 @@ hold on;
 %fillPlot(spiral_updates_s,spiral_upd_s_sd,x,'g');
 
 %%% TURNS 
-plot(x,random_turns_e,'b--','DisplayName','Random Elongated Room')
-fillPlot(random_turns_e,random_trn_e_sd,x,'b'); 
+%plot(x,random_turns_e,'b--','DisplayName','Random Elongated Room')
+%fillPlot(random_turns_e,random_trn_e_sd,x,'b'); 
 
 plot(x,random_turns_s,'b','DisplayName','Random Square Room')
 fillPlot(random_turns_s,random_trn_s_sd,x,'b'); 
 
 
-plot(x,snaking_turns_e,'r--','DisplayName','Snaking Elongated Room')
-fillPlot(snaking_turns_e,snaking_trn_e_sd,x,'r');
+%plot(x,snaking_turns_e,'r--','DisplayName','Snaking Elongated Room')
+%fillPlot(snaking_turns_e,snaking_trn_e_sd,x,'r');
 plot(x,snaking_turns_s,'r','DisplayName','Snaking Square Room'); 
 fillPlot(snaking_turns_s,snaking_trn_s_sd,x,'r'); 
 
-plot(x,spiral_turns_e,'g--','DisplayName','Spiral Elongated Room')
-fillPlot(spiral_turns_e,spiral_trn_e_sd,x,'g'); 
+%plot(x,spiral_turns_e,'g--','DisplayName','Spiral Elongated Room')
+%fillPlot(spiral_turns_e,spiral_trn_e_sd,x,'g'); 
 
 plot(x,spiral_turns_s,'g','DisplayName','Spiral Square Room')
 fillPlot(spiral_turns_s,spiral_trn_s_sd,x,'g'); 

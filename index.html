@@ -17,8 +17,10 @@
   <script>
 
   var c = null;
+  // Add a robot at a random position and angle. Width 6, speed 3. 
   function addRobot(){
-    c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
+    // c = new Snaking(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
+    c = new Cleaner(Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),6,"#5f1",Math.random()*Math.PI*2, 3);
   }
 
   var canvas = document.getElementById("canvas");

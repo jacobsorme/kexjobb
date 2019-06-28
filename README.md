@@ -5,6 +5,7 @@ This is the code for a Bachelors Degree thesis at KTH, [link](http://urn.kb.se/r
 ### The Program
 An explanation of the program can also be found in the thesis. The file `index.html` can be opened in a browser and the program is ran from there. A trail from a vacuum cleaner is drawn on a HTML canvas. Data on the pixels are then examined to obtain coverage. 
 
+
 ```javascript
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -22,4 +23,4 @@ function pixels(ctx){
 }
 ```
 
-Three cleaners are availible. The class `Cleaner` is the default random cleaner. There are classes `Snake` and `Spiral` too. 
+Three cleaners are availible. The class `Cleaner` is the default random cleaner. There are classes `Snake` and `Spiral` too. In the end a heatmap is generated and results are printed to console. 

@@ -3,7 +3,7 @@
 This is the code for a Bachelors Degree thesis at KTH, [link](http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-229771). 
 
 ### The Program
-An explanation of the program can also be found in the thesis. The file `index.html` can be opened in a browser and the program is ran from there. A trail from a vacuum cleaner is drawn on a HTML canvas. Data on the pixels are then examined to obtain coverage. 
+An explanation of the program can also be found in the thesis. The file `index.html` can be opened in a browser and the program is ran from there. A trail from a vacuum cleaner is drawn on a HTML canvas. Data on the pixels are then examined to obtain coverage. Below are snippets from `index.html`, where the coverage is calculated. 
 
 
 ```javascript

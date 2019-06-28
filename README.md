@@ -3,8 +3,13 @@
 This is the code for a Bachelors Degree thesis at KTH, [link](http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-229771). 
 
 ### The Program
-An explanation of the program can also be found in the thesis. The file `index.html` can be opened in a browser and the program is ran from there. A trail from a vacuum cleaner is drawn on a HTML canvas. Data on the pixels are then examined to obtain coverage. `ctx` text in the snippet below is the context for the HTML canvas. 
+An explanation of the program can also be found in the thesis. The file `index.html` can be opened in a browser and the program is ran from there. A trail from a vacuum cleaner is drawn on a HTML canvas. Data on the pixels are then examined to obtain coverage. 
 
+```javascript
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+```
+`ctx` in snippets is the context for the HTML canvas. 
 ```javascript
 function pixels(ctx){
     count=0;
@@ -14,5 +19,7 @@ function pixels(ctx){
       if(imgData.data[i]>0)count++; // Alpha value examined, if a pixel colored (covered) it's greater than zero
     }
     return count/(imgData.data.length/4); // Four values per pixel in array, (imgData.data.length/4) pixels. 
-  }
+}
 ```
+
+Three cleaners are availible. The class `Cleaner` is the default random cleaner. There are classes `Snake` and `Spiral` too. 

@@ -15,7 +15,7 @@ class Cleaner {
   }
   render(){
     ctx.globalAlpha=0.1;
-    ctx.strokeStyle="#000";
+    ctx.strokeStyle=this.color;
     ctx.lineWidth=2*this.radius;
     let i =this.trace.length-1;
       ctx.beginPath();
